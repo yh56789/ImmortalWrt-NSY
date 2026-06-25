@@ -142,6 +142,21 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_SCRIPT
         $GITHUB_WORKSPACE/scripts/preset-clash-core.sh $CLASH_KERNEL
         # $GITHUB_WORKSPACE/scripts/preset-adguard-core.sh $CLASH_KERNEL
+        
+    - name: Add eBPF/Κernel βBp ΣPlanıγ
+      run: |
+        echo "CONFIG_DEVEL=y" >> .config
+        echo "CONFIG_KERNEL_DEBUG_INFO=y" >> .config
+        echo "CONFIG_KERNEL_DEBUG_INFO_REDUCED=n" >> .config
+        echo "CONFIG_KERNEL_DEBUG_INFO_BTF=y" >> .config
+        echo "CONFIG_KERNEL_CGROUPS=y" >> .config
+        echo "CONFIG_KERNEL_CGROUP_BPF=y" >> .config
+        echo "CONFIG_KERNEL_BPF_EVENTS=y" >> .config
+        echo "CONFIG_BPF_TOOLCHAIN_HOST=y" >> .config
+        echo "CONFIG_KERNEL_XDP_SOCKETS=y" >> .config
+        echo "CONFIG_PACKAGE_kmod-xdp-sockets-diag=y" >> .config
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
 
     - name: Download DL Package
       run: |
