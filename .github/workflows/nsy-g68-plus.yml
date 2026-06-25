@@ -155,6 +155,7 @@ jobs:
         echo "CONFIG_BPF_TOOLCHAIN_HOST=y" >> .config
         echo "CONFIG_KERNEL_XDP_SOCKETS=y" >> .config
         echo "CONFIG_PACKAGE_kmod-xdp-sockets-diag=y" >> .config
+        cd $OPENWRT_PATH
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
